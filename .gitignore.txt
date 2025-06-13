@@ -1,0 +1,37 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Node.js
+/node_modules/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build artifacts
+/dist/
+/build/
+
+# Package manager files
+npm-debug.log
+yarn-error.log
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+*~
+
+# Windows AppData / System files (Crucial for your current error!)
+# These should NOT be in your project folder, but adding them here is a safeguard
+# if git add . was ever run from a parent folder again.
+# More importantly, ENSURE you are in the correct project folder when running git add .
+/AppData/
+/Program Files/
+/Program Files (x86)/
+/Windows/
+$RECYCLE.BIN/
+System Volume Information/
