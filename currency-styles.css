@@ -189,10 +189,7 @@ section[id$="Section"] {
     transform: translateY(-2px);
 }
 
-/* Währungsrechner spezifische Stile */
-.converter-section {
-    /* Nutzt section[id$="Section"] */
-}
+
 
 .converter-card {
     /* Nutzt das Styling von #addDestinationForm etc. */
@@ -257,7 +254,7 @@ section[id$="Section"] {
     main { max-width: 900px; padding: 0 15px; }
     h1 { font-size: 2.8em; }
     h2 { font-size: 1.8em; }
-    /* Keine Änderung für converter-section hier, da es die allgemeinen section Stile nutzt */
+    
 }
 
 @media (max-width: 768px) {

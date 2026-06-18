@@ -8,7 +8,6 @@ body {
     box-sizing: border-box; /* Padding wird in der Gesamtgröße berücksichtigt */
     min-height: 100vh; /* Mindesthöhe des Viewports */
 }
-/* Test Gi */
 
 /* Hintergrundbild auf dem HTML-Element, damit es den ganzen Viewport ausfüllt */
 html {
