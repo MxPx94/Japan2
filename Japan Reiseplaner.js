@@ -26,44 +26,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Reiseziel-Planer: Referenzen werden weiter unten im localStorage-Block verwendet.
     const addDestinationForm = document.getElementById('addDestinationForm');
     const destinationInput = document.getElementById('destinationInput');
     const reisezieleListe = document.getElementById('reisezieleListe');
-    if (addDestinationForm && destinationInput && reisezieleListe) {
-        addDestinationForm.addEventListener('submit', (event) => {
-            event.preventDefault();
-            const destinationText = destinationInput.value.trim();
-            if (destinationText !== "") {
-                const listItem = document.createElement('li');
-                listItem.textContent = destinationText;
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Löschen';
-                // ... (Styling für Delete Button - unverändert) ...
-                deleteButton.style.marginLeft = '10px';
-                deleteButton.style.padding = '5px 10px';
-                deleteButton.style.backgroundColor = '#d9534f';
-                deleteButton.style.color = 'white';
-                deleteButton.style.border = 'none';
-                deleteButton.style.borderRadius = '3px';
-                deleteButton.style.cursor = 'pointer';
-                deleteButton.style.transition = 'background-color 0.2s ease';
-                deleteButton.addEventListener('mouseover', () => {
-                    deleteButton.style.backgroundColor = '#c9302c';
-                });
-                deleteButton.addEventListener('mouseout', () => {
-                    deleteButton.style.backgroundColor = '#d9534f';
-                });
-                deleteButton.addEventListener('click', () => {
-                    reisezieleListe.removeChild(listItem);
-                });
-                listItem.appendChild(deleteButton);
-                reisezieleListe.appendChild(listItem);
-                destinationInput.value = '';
-            } else {
-                alert('Bitte geben Sie ein Reiseziel ein!');
-            }
-        });
-    }
 
     // --- JSON-Aufgaben von Tag 31 (unverändert) ---
     // Der Code hier wurde gekürzt, da er nur für Konsolen-Ausgaben war
@@ -186,8 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // =======================================================
-    // === NEUE AUFGABEN FÜR TAG 36: Vertiefung Promises ===
+    // === ÜBUNGEN TAG 36-37: Promises & async/await ===
+    // (Lernübungen – nicht für die Produktion gedacht)
     // =======================================================
+    /*
 
     console.log('\n=== Tag 36: Vertiefung Promises & Fehlerbehandlung ===');
 
@@ -367,11 +335,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    fetchDataSequentiallyWithError(); // Ruft die Funktion mit Fehlerprovokation auf
+    fetchDataSequentiallyWithError();
+    */
 
     // =======================================================
-    // === NEUE AUFGABEN FÜR TAG 38: Fehlerbehandlung try...catch...finally & throw ===
+    // === ÜBUNGEN TAG 38: try...catch...finally & throw ===
+    // (Lernübungen – nicht für die Produktion gedacht)
     // =======================================================
+    /*
 
     console.log('\n=== Tag 38: Fehlerbehandlung try...catch...finally & throw ===');
 
@@ -532,12 +503,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verwende setTimeout, um die Aufrufe zeitlich zu trennen, damit die Spinner-Anzeige sichtbar wird
     setTimeout(() => {
         fetchDataWithFinally(true)
-            .then(result => console.log("Aufgabe 3: Gesamter Prozess abgeschlossen (Erfolg):", result)) // Wird nicht erreicht
+            .then(result => console.log("Aufgabe 3: Gesamter Prozess abgeschlossen (Erfolg):", result))
             .catch(err => console.error("Aufgabe 3: Gesamter Prozess abgeschlossen (Fehler im Catch außen):", err.message));
-    }, 3000); // Startet den zweiten Aufruf 3 Sekunden nach dem ersten
+    }, 3000);
+    */
 
     // =======================================================
-    // === NEUE AUFGABEN FÜR TAG 39: Web Storage API ===
+    // === TAG 39: Web Storage API ===
     // =======================================================
 
     console.log('\n=== Tag 39: Web Storage API (localStorage und sessionStorage) ===');
@@ -661,20 +633,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Löschen';
-        deleteButton.style.marginLeft = '10px';
-        deleteButton.style.padding = '5px 10px';
-        deleteButton.style.backgroundColor = '#d9534f';
-        deleteButton.style.color = 'white';
-        deleteButton.style.border = 'none';
-        deleteButton.style.borderRadius = '3px';
-        deleteButton.style.cursor = 'pointer';
-        deleteButton.style.transition = 'background-color 0.2s ease';
-        deleteButton.addEventListener('mouseover', () => {
-            deleteButton.style.backgroundColor = '#c9302c';
-        });
-        deleteButton.addEventListener('mouseout', () => {
-            deleteButton.style.backgroundColor = '#d9534f';
-        });
+        deleteButton.classList.add('delete-btn');
 
         // Event-Listener für den Lösch-Button
         deleteButton.addEventListener('click', () => {
@@ -717,64 +676,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // =======================================================
-    // === NEU: JavaScript für das aufklappbare Menü ===
-    // =======================================================
-    
-    // Elemente für die Navigation holen
-    const hamburger = document.querySelector(".hamburger");
-    const navMenu = document.querySelector(".nav-menu");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    // Event Listener für den Klick auf das Hamburger-Menü
-    if (hamburger && navMenu) {
-        hamburger.addEventListener("click", () => {
-            hamburger.classList.toggle("active");
-            navMenu.classList.toggle("active");
-        });
-    }
-
-    // Event Listener für jeden Navigationslink, um das Menü nach dem Klick zu schließen
-    if (navLinks) {
-        navLinks.forEach(link => {
-            link.addEventListener("click", () => {
-                // Schließt das Menü nur, wenn es geöffnet ist
-                if (hamburger.classList.contains("active")) {
-                    hamburger.classList.remove("active");
-                    navMenu.classList.remove("active");
-                }
-            });
-        });
-    }
-
-    // Warte, bis das gesamte HTML-Dokument geladen ist
-document.addEventListener('DOMContentLoaded', function() {
-
-    // Wähle das Hamburger-Icon und das Navigationsmenü aus dem DOM aus
+    // --- Hamburger-Menü ---
     const hamburger = document.querySelector('.hamburger');
     const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
 
-    // Überprüfe, ob die Elemente gefunden wurden, bevor du Event-Listener hinzufügst
     if (hamburger && navMenu) {
-        // Füge einen Event-Listener für Klicks auf das Hamburger-Icon hinzu
         hamburger.addEventListener('click', () => {
-            // Schalte die CSS-Klasse 'active' für beide Elemente um
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Wähle alle Navigationslinks aus
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        // Füge für jeden Link einen Klick-Listener hinzu
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
-                // Schließe das Menü, indem die 'active' Klasse entfernt wird
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+                if (hamburger.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
             });
         });
     }
-});
 
 }); // Ende von DOMContentLoaded

@@ -1,21 +1,23 @@
 /* --- Globale Stile & Basis-Layout --- */
 body {
-    font-family: sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding-top: 60px;
-    /* Platz für die fixierte Navigationsleiste */
-    color: #ffffff;
-    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     background-image: url("https://bit.ly/43Kdzup");
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100vh;
+    margin: 0;
+    padding-top: 60px;
+    box-sizing: border-box;
+    color: #ffffff;
 }
 
-/* --- Navigation Styling (komplett überarbeitet für aufklappbares Menü) --- */
+/* --- Navigation Styling --- */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -41,7 +43,6 @@ body {
 
 .nav-menu {
     display: flex;
-    /* Links nebeneinander auf Desktop */
     list-style: none;
     margin: 0;
     padding: 0;
@@ -64,16 +65,14 @@ body {
     background-color: rgba(255, 255, 255, 0.2);
 }
 
-/* Hamburger-Menü Styling (Standardmäßig versteckt auf Desktop) */
+/* --- Hamburger-Menü --- */
 .hamburger {
     display: none;
-    /* Auf dem Desktop ausblenden */
     cursor: pointer;
     background: none;
     border: none;
     padding: 0;
     z-index: 1001;
-    /* Sorgt dafür, dass der Button über dem Menü liegt */
 }
 
 .bar {
@@ -85,48 +84,7 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-/* --- Hauptinhalts-Container --- */
-.second-bg {
-    max-width: 800px;
-    width: 90%;
-    padding: 20px;
-    border: 2px solid #e22b86;
-    margin: 60px auto 30px auto;
-    background-color: rgba(0, 0, 0, 0.7);
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    box-sizing: border-box;
-}
-
-/* --- Typografie & Textstile --- */
-h1,
-h2,
-h3 {
-    color: #ffffff;
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-}
-
-h1 {
-    font-size: 2.5em;
-    margin-top: 30px;
-}
-
-#main-title {
-    color: #e22b86;
-    font-size: 3em;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8);
-    margin-bottom: 10px;
-}
-
-#main-subtitle {
-    color: #e22b86;
-    font-size: 1.5em;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
-    margin-top: 0;
-}
-
+/* --- Allgemeine Link-Stile --- */
 a {
     color: #e22b86;
     text-decoration: none;
@@ -137,137 +95,56 @@ a:hover {
     text-decoration: underline;
 }
 
-/* --- Bilder & Bildunterschriften --- */
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 20px auto;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.image-caption {
-    text-align: center;
-    font-size: 0.9em;
-    color: #ffffff;
-    margin-top: 5px;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
-}
-
-/* --- Sektionen & Artikel --- */
-article,
-section {
+/* --- Visitenkarte --- */
+.visitenkarte {
+    max-width: 300px;
+    width: 90%;
+    padding: 20px;
+    border: 2px solid #e22b86;
     margin: auto;
+    background-color: rgba(255, 255, 255, 0.7);
     text-align: center;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    box-sizing: border-box;
 }
 
-section {
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+.visitenkarte h2 {
+    color: #000000;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.8em;
 }
 
-section:last-child {
-    border-bottom: none;
+.visitenkarte p {
+    color: #000000;
+    font-size: 1em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    line-height: 1.4;
 }
 
-/* --- Responsive Tabelle --- */
-.responsive-table {
-    overflow-x: auto;
-    margin: 30px auto;
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    padding: 10px;
+.visitenkarte .profile-img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #e22b86;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th,
-td {
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 8px;
-    text-align: left;
-    color: #ffffff;
-}
-
-th {
-    background-color: rgba(226, 43, 134, 0.8);
-    color: white;
-}
-
-tr:nth-child(even) {
-    background-color: rgba(0, 0, 0, 0.2);
-}
-
-/* --- Kontaktformular --- */
-.contact-form-section {
-    max-width: 500px;
-    margin: 40px auto;
-    padding: 20px;
-    background-color: rgba(0, 0, 0, 0.7);
-    border: 1px solid #e22b86;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-}
-
-.contact-form-section h3 {
-    text-align: center;
+.visitenkarte .contact-info a {
     color: #e22b86;
-    margin-top: 0;
-    text-shadow: none;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-.form-group input[type="text"],
-.form-group input[type="email"],
-.form-group textarea {
-    width: calc(100% - 20px);
-    padding: 10px;
-    border: 1px solid #888;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #ffffff;
-}
-
-.form-group textarea {
-    resize: vertical;
-}
-
-.form-group button {
-    background-color: #e22b86;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    text-decoration: none;
+    margin: 0 8px;
     font-size: 1em;
-    transition: background-color 0.3s ease;
-    display: block;
-    width: 100%;
-    box-sizing: border-box;
+    transition: color 0.3s ease;
 }
 
-.form-group button:hover {
-    background-color: #c72474;
+.visitenkarte .contact-info a:hover {
+    text-decoration: underline;
+    color: #c72474;
 }
 
 /* --- Footer --- */
@@ -275,18 +152,14 @@ footer {
     color: white;
     text-align: center;
     padding: 15px 0;
-    margin-top: 40px;
+    margin-top: auto;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
 }
 
-/* --- Media Queries für Responsivität (aktualisiert) --- */
-
+/* --- Media Queries --- */
 @media screen and (max-width: 768px) {
-
-    /* Zeigt das Hamburger-Icon an und versteckt die Navigationsliste */
     .hamburger {
         display: block;
     }
@@ -294,37 +167,28 @@ footer {
     .nav-menu {
         position: fixed;
         left: -100%;
-        /* Versteckt das Menü außerhalb des Viewports */
         top: 70px;
-        /* Anpassung an die Höhe des Headers */
         flex-direction: column;
         background-color: rgba(226, 43, 134, 0.75);
-        /* Menü-Hintergrundfarbe */
         width: 100%;
         height: 100vh;
-        /* Nimmt die gesamte Höhe des Viewports ein */
         text-align: center;
         transition: all 0.5s ease;
-        /* Sanfte Animation beim Aufklappen */
-        padding-top: 0%;
+        padding-top: 0;
     }
 
     .nav-item {
         margin: 0.9rem 0;
-        /* Vertikaler Abstand zwischen den Links */
     }
 
     .nav-link {
         font-size: 1.5rem;
-        /* Größere Schrift für bessere Bedienbarkeit */
     }
 
-    /* Diese Klasse wird mit JavaScript hinzugefügt, um das Menü aufzuklappen */
     .nav-menu.active {
         left: 0;
     }
 
-    /* Animation für das Hamburger-Icon, wenn das Menü geöffnet ist */
     .hamburger.active .bar:nth-child(2) {
         opacity: 0;
     }
@@ -335,5 +199,49 @@ footer {
 
     .hamburger.active .bar:nth-child(3) {
         transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .visitenkarte {
+        width: 95%;
+        padding: 15px;
+        margin-top: 50px;
+    }
+
+    .visitenkarte h2 {
+        font-size: 1.6em;
+    }
+
+    .visitenkarte p {
+        font-size: 0.95em;
+    }
+
+    .visitenkarte .profile-img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding-top: 70px;
+    }
+
+    .visitenkarte {
+        width: 98%;
+        padding: 10px;
+        margin-top: 40px;
+    }
+
+    .visitenkarte h2 {
+        font-size: 1.4em;
+    }
+
+    .visitenkarte p {
+        font-size: 0.9em;
+    }
+
+    .visitenkarte .contact-info a {
+        font-size: 0.9em;
+        margin: 0 5px;
     }
 }

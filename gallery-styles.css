@@ -152,40 +152,6 @@ footer {
     box-sizing: border-box;
 }
 
-/* --- Navigationsleiste --- */
-.main-nav {
-    display: flex;
-    justify-content: space-around;
-    background-color: rgba(226, 43, 134, 0.4);
-    /* Etwas weniger transparent für bessere Sichtbarkeit */
-    padding: 10px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    flex-wrap: wrap;
-    box-sizing: border-box;
-}
-
-.main-nav a {
-    color: white;
-    text-decoration: none;
-    padding: 8px 15px;
-    font-weight: bold;
-    transition: background-color 0.3s ease;
-    border-radius: 5px;
-    white-space: nowrap;
-    flex-grow: 1;
-    /* Lässt Links wachsen (Desktop) */
-    text-align: center;
-}
-
-.main-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
 /* --- Stile für die Interaktive Japan-Karte (Micro-Projekt) --- */
 #interactiveMapSection {
     background-color: rgba(0, 0, 0, 0.7);
@@ -443,7 +409,7 @@ footer {
         text-align: center;
         transition: all 0.5s ease;
         /* Sanfte Animation beim Aufklappen */
-        padding-top: 0%;
+        padding-top: 0;
     }
 
     .nav-item {
