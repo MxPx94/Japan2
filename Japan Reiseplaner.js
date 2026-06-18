@@ -1,20 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Vorherige Aufgaben (unverändert, nur gekürzt dargestellt) ---
     const proverbsList = document.getElementById('japaneseProverbsList');
-    if (proverbsList) {
-        const japaneseProverbs = [
-            "猿も木から落ちる (Saru mo ki kara ochiru) - Auch Affen fallen von Bäumen. (Jeder macht Fehler)",
-            "七転び八起き (Nana korobi ya oki) - Siebenmal fallen, achtmal aufstehen. (Gib niemals auf)",
-            "蛙の子は蛙 (Kaeru no ko wa kaeru) - Ein Froschkind ist ein Frosch. (Der Apfel fällt nicht weit vom Stamm)",
-            "知らぬが仏 (Shiranu ga hotoke) - Nicht zu wissen ist Buddha. (Unwissenheit ist ein Segen)",
-            "花より団子 (Hana yori dango) - Knödel statt Blumen. (Praktischer Nutzen vor Ästhetik)"
-        ];
-        japaneseProverbs.forEach(proverbText => {
-            const listItem = document.createElement('li');
-            listItem.textContent = proverbText;
-            proverbsList.appendChild(listItem);
-        });
-    }
+    
 
     const toggleHighlightButton = document.getElementById('toggleHighlightButton');
     const highlightBox = document.getElementById('highlightBox');
@@ -104,10 +91,32 @@ document.addEventListener('DOMContentLoaded', () => {
     let allProverbs = []; // Hier werden alle geladenen Sprichwörter gespeichert
     let currentProverbIndex = -1; // Index des aktuell angezeigten Sprichworts
 
+    // Neue Funktion zum Rendern der Sprichwörter-Liste
+    function renderProverbsList(proverbs) {
+        const proverbsListContainer = document.getElementById('japaneseProverbsList'); // Dein <ul> oder <div> Element für die Liste
+        if (!proverbsListContainer) {
+            console.error("Element mit ID 'japaneseProverbsList' nicht gefunden.");
+            return;
+        }
+
+        proverbsListContainer.innerHTML = ''; // Vorherige Einträge löschen
+
+        if (proverbs && proverbs.length > 0) {
+            proverbs.forEach(proverb => {
+                const listItem = document.createElement('li');
+                // Stelle sicher, dass die Eigenschaftsnamen (japanisch, deutsch) mit deiner JSON-Datei übereinstimmen
+                listItem.innerHTML = `<strong>${proverb.japanisch}</strong> - ${proverb.deutsch}`;
+                proverbsListContainer.appendChild(listItem);
+            });
+        } else {
+            proverbsListContainer.innerHTML = '<p>Keine japanischen Sprichwörter zum Anzeigen.</p>';
+        }
+    }
+
     // Funktion zum Laden der Sprichwörter aus der JSON-Datei
     async function loadProverbs() {
         try {
-            const response = await fetch('japanese-proverbs.json');
+            const response = await fetch('japanese-proverbs.json'); // Stelle sicher, dass der Pfad korrekt ist
             if (!response.ok) {
                 throw new Error(`Netzwerkantwort war nicht ok: ${response.status} ${response.statusText}`);
             }
@@ -115,13 +124,16 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Sprichwörter erfolgreich geladen:", allProverbs);
 
             if (allProverbs.length > 0) {
-                displayRandomProverb(); // Zeige sofort ein zufälliges Sprichwort an
+                // Zeige ein zufälliges Sprichwort in der Karte an
+                displayRandomProverb(); 
+                // NEU: Rufe die Funktion auf, um die Liste zu füllen
+                renderProverbsList(allProverbs); // <-- HIER IST DIE WESENTLICHE ÄNDERUNG
             } else {
                 proverbErrorDisplay.textContent = 'Keine Sprichwörter in der Datei gefunden.';
             }
 
         } catch (error) {
-            console.error("Fehler beim Laden der sprichwoerter.json-Datei:", error);
+            console.error("Fehler beim Laden der japanese-proverbs.json-Datei:", error);
             proverbErrorDisplay.textContent = 'Fehler beim Laden der Sprichwörter. Bitte versuchen Sie es später erneut.';
             japaneseProverbDisplay.textContent = '';
             germanProverbDisplay.textContent = '';
@@ -159,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 proverbCard.classList.add('fade-in');
             }, 300); // Entspricht der Transitionsdauer im CSS
         } else {
-             japaneseProverbDisplay.textContent = randomProverb.japanisch;
-             germanProverbDisplay.textContent = randomProverb.deutsch;
+            japaneseProverbDisplay.textContent = randomProverb.japanisch;
+            germanProverbDisplay.textContent = randomProverb.deutsch;
         }
     }
 
@@ -335,29 +347,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Beispiel für einen Fehlerfall im sequenziellen Aufruf
     async function fetchDataSequentiallyWithError() {
-         console.log('\nAufgabe 3: Sequenzielle API-Aufrufe mit Fehler starten...');
-         try {
-             console.log('Aufgabe 3: Rufe ersten Datensatz ab (Benutzerdaten)...');
-             const userData = await simulatedApiCall({ id: 2, name: 'Hanako Suzuki' }, 1500);
-             console.log('Aufgabe 3: Erster Datensatz erhalten:', userData);
+        console.log('\nAufgabe 3: Sequenzielle API-Aufrufe mit Fehler starten...');
+        try {
+            console.log('Aufgabe 3: Rufe ersten Datensatz ab (Benutzerdaten)...');
+            const userData = await simulatedApiCall({ id: 2, name: 'Hanako Suzuki' }, 1500);
+            console.log('Aufgabe 3: Erster Datensatz erhalten:', userData);
 
-             console.log('Aufgabe 3: Rufe zweiten Datensatz ab (Post-Daten von Benutzer - Fehler provozieren)...');
-             // Hier wird ein Fehler provoziert
-             const postData = await simulatedApiCall('Fehler beim Abrufen von Posts', 1000, true);
-             console.log('Aufgabe 3: Zweiter Datensatz erhalten:', postData); // Diese Zeile wird nicht erreicht
+            console.log('Aufgabe 3: Rufe zweiten Datensatz ab (Post-Daten von Benutzer - Fehler provozieren)...');
+            // Hier wird ein Fehler provoziert
+            const postData = await simulatedApiCall('Fehler beim Abrufen von Posts', 1000, true);
+            console.log('Aufgabe 3: Zweiter Datensatz erhalten:', postData); // Diese Zeile wird nicht erreicht
 
-             const combinedData = { ...userData, ...postData };
-             console.log('Aufgabe 3: Kombinierte Daten:', combinedData);
+            const combinedData = { ...userData, ...postData };
+            console.log('Aufgabe 3: Kombinierte Daten:', combinedData);
 
-         } catch (error) {
-             console.error('Aufgabe 3 Fehler (mit Fehlertest): Fehler beim sequenziellen API-Aufruf:', error.message);
-             // In einer realen Anwendung könntest du hier UI-Elemente aktualisieren oder einen Fallback bereitstellen.
-         }
-     }
+        } catch (error) {
+            console.error('Aufgabe 3 Fehler (mit Fehlertest): Fehler beim sequenziellen API-Aufruf:', error.message);
+            // In einer realen Anwendung könntest du hier UI-Elemente aktualisieren oder einen Fallback bereitstellen.
+        }
+    }
 
-     fetchDataSequentiallyWithError(); // Ruft die Funktion mit Fehlerprovokation auf
+    fetchDataSequentiallyWithError(); // Ruft die Funktion mit Fehlerprovokation auf
 
-// =======================================================
+    // =======================================================
     // === NEUE AUFGABEN FÜR TAG 38: Fehlerbehandlung try...catch...finally & throw ===
     // =======================================================
 
@@ -423,8 +435,8 @@ document.addEventListener('DOMContentLoaded', () => {
             nonExistentElement.textContent = 'Dieser Text wird gesetzt.';
             console.log("Aufgabe 2: Text auf nicht-existentem Element gesetzt (wird nicht erreicht)");
         } else {
-             // Hier fängt der catch-Block den Fehler nicht ab, da wir ihn nicht werfen.
-             // Stattdessen wird nur ein Log-Eintrag gemacht.
+            // Hier fängt der catch-Block den Fehler nicht ab, da wir ihn nicht werfen.
+            // Stattdessen wird nur ein Log-Eintrag gemacht.
             console.warn("Aufgabe 2: Element 'nonExistentId' nicht gefunden (warn)");
         }
     } catch (error) {
@@ -524,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(err => console.error("Aufgabe 3: Gesamter Prozess abgeschlossen (Fehler im Catch außen):", err.message));
     }, 3000); // Startet den zweiten Aufruf 3 Sekunden nach dem ersten
 
-// =======================================================
+    // =======================================================
     // === NEUE AUFGABEN FÜR TAG 39: Web Storage API ===
     // =======================================================
 
@@ -574,10 +586,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Der Hauptunterschied zwischen localStorage und sessionStorage:
     // localStorage: Daten bleiben nach dem Schließen des Browsers oder des Tabs persistent.
-    //              Sie haben kein Ablaufdatum und bleiben, bis sie explizit gelöscht werden.
+    //             Sie haben kein Ablaufdatum und bleiben, bis sie explizit gelöscht werden.
     // sessionStorage: Daten bleiben nur für die Dauer der Browsersitzung erhalten.
-    //                 Wenn der Tab oder das Fenster geschlossen wird, werden die Daten gelöscht.
-    //                 Jeder Tab hat seine eigene, isolierte sessionStorage.
+    //               Wenn der Tab oder das Fenster geschlossen wird, werden die Daten gelöscht.
+    //               Jeder Tab hat seine eigene, isolierte sessionStorage.
 
     // Testen Sie dies:
     // 1. Öffnen Sie die Konsole.
@@ -599,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // sessionStorage.clear(); // Löscht alles im sessionStorage für diesen Tab/Sitzung
 
 
-    // Aufgabe 3 (Projekt "Japan Reiseplaner"): Speichere die reiseziele-Liste im localStorage,
+    // Aufgabe 3 (Projekt "Japan Reiseplaner"): Speichere die reiseziele-liste im localStorage,
     // sodass sie auch nach dem Schließen und erneuten Öffnen des Browsers erhalten bleibt.
     // Lade die Liste beim Start der Seite aus dem localStorage.
     // (Denke daran, dass localStorage nur Strings speichert, also JSON.stringify und JSON.parse verwenden).
@@ -657,7 +669,6 @@ document.addEventListener('DOMContentLoaded', () => {
         deleteButton.style.borderRadius = '3px';
         deleteButton.style.cursor = 'pointer';
         deleteButton.style.transition = 'background-color 0.2s ease';
-
         deleteButton.addEventListener('mouseover', () => {
             deleteButton.style.backgroundColor = '#c9302c';
         });
@@ -665,11 +676,15 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteButton.style.backgroundColor = '#d9534f';
         });
 
+        // Event-Listener für den Lösch-Button
         deleteButton.addEventListener('click', () => {
             // Entferne das Element aus dem DOM
             reisezieleListe.removeChild(listItem);
-            // Entferne das Element auch aus dem reisezieleArray
-            reisezieleArray = reisezieleArray.filter(item => item !== destinationText);
+            // Entferne das Element aus dem reisezieleArray
+            const index = reisezieleArray.indexOf(destinationText);
+            if (index > -1) {
+                reisezieleArray.splice(index, 1);
+            }
             // Speichere das aktualisierte Array im localStorage
             saveReiseziele();
         });
@@ -677,32 +692,89 @@ document.addEventListener('DOMContentLoaded', () => {
         listItem.appendChild(deleteButton);
         reisezieleListe.appendChild(listItem);
     }
-
-
-    // Modifiziere den Event Listener für das Hinzufügen von Zielen
+    
+    // Anpassen des Event-Listeners für das Formular, um die neuen Funktionen zu nutzen
     if (addDestinationForm && destinationInput && reisezieleListe) {
         addDestinationForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const destinationText = destinationInput.value.trim();
-
             if (destinationText !== "") {
-                if (!reisezieleArray.includes(destinationText)) { // Optional: Duplikate vermeiden
-                    addDestinationToDOM(destinationText); // Füge zum DOM hinzu
-                    reisezieleArray.push(destinationText); // Füge zum Array hinzu
-                    saveReiseziele(); // Speichere das aktualisierte Array
-                    destinationInput.value = '';
-                } else {
-                    alert('Dieses Reiseziel wurde bereits hinzugefügt!');
-                }
+                // Füge das neue Reiseziel zum Array hinzu
+                reisezieleArray.push(destinationText);
+                // Füge es zum DOM hinzu
+                addDestinationToDOM(destinationText);
+                // Speichere das aktualisierte Array im localStorage
+                saveReiseziele();
+                // Leere das Eingabefeld
+                destinationInput.value = '';
             } else {
                 alert('Bitte geben Sie ein Reiseziel ein!');
             }
         });
+
+        // Lade die gespeicherten Reiseziele beim Start
+        loadReiseziele();
     }
 
 
-    // Beim DOMContentLoaded: Lade die Reiseziele aus localStorage
-    loadReiseziele();
+    // =======================================================
+    // === NEU: JavaScript für das aufklappbare Menü ===
+    // =======================================================
+    
+    // Elemente für die Navigation holen
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const navLinks = document.querySelectorAll(".nav-link");
 
+    // Event Listener für den Klick auf das Hamburger-Menü
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+    }
+
+    // Event Listener für jeden Navigationslink, um das Menü nach dem Klick zu schließen
+    if (navLinks) {
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                // Schließt das Menü nur, wenn es geöffnet ist
+                if (hamburger.classList.contains("active")) {
+                    hamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                }
+            });
+        });
+    }
+
+    // Warte, bis das gesamte HTML-Dokument geladen ist
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Wähle das Hamburger-Icon und das Navigationsmenü aus dem DOM aus
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    // Überprüfe, ob die Elemente gefunden wurden, bevor du Event-Listener hinzufügst
+    if (hamburger && navMenu) {
+        // Füge einen Event-Listener für Klicks auf das Hamburger-Icon hinzu
+        hamburger.addEventListener('click', () => {
+            // Schalte die CSS-Klasse 'active' für beide Elemente um
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Wähle alle Navigationslinks aus
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Füge für jeden Link einen Klick-Listener hinzu
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Schließe das Menü, indem die 'active' Klasse entfernt wird
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
 });
 
+}); // Ende von DOMContentLoaded

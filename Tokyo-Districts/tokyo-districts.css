@@ -1,0 +1,623 @@
+/* ======================================= */
+/* 1. GLOBALE ANPASSUNGEN (Desktop First) */
+/* Übernimmt Look & Feel von index-styles.css */
+/* ======================================= */
+
+body {
+    height: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    font-family: sans-serif;
+    /* Entspricht der Hauptseite */
+    color: white;
+    background-color: #1a1a1a;
+    /* Dunkler Hintergrund für den Parallax-Effekt */
+    padding-top: 60px;
+    /* Platz für die fixe Navigationsleiste */
+}
+
+/* --- Parallax Container (3D-Effekt) --- */
+
+.parallax-group {
+    height: 100vh;
+    transform-style: preserve-3d;
+    position: relative;
+    overflow: hidden;
+    perspective: 2px;
+    /* Stronger 3D parallax illusion on desktop */
+    perspective-origin: top center;
+}
+
+.parallax-layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 100px 50px;
+}
+
+/* Ensure parallax layers sit behind nav */
+.parallax-layer {
+    z-index: 0;
+}
+
+/* HINTERGRUND EBENE (Parallax-Effekt) */
+.background-img {
+    background-size: cover;
+    background-position: 50% 10%;
+    /* Behält die spezifische Zentrierung bei */
+    background-repeat: no-repeat;
+    /* Use a CSS var for vertical offset so JS can update only the var or inline transform */
+    transform: translateY(var(--parallax-y, 0px)) translateZ(-2px) scale(2.4);
+    transform-origin: top center;
+    will-change: transform, background-position;
+    z-index: 0;
+    pointer-events: none;
+    /* avoid intercepting clicks */
+}
+
+/* VORDERGRUND INHALT */
+.foreground-content {
+    transform: translateZ(0);
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Stark dunkler, halbtransparenter Hintergrund, um Text lesbar zu halten */
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Typografie angepasst an das dunkle, akzentuierte Design */
+.foreground-content h2 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 4px #000;
+    color: #e22b86;
+    /* Akzentfarbe der Hauptseite für die Titel */
+}
+
+.foreground-content p {
+    max-width: 800px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    color: #ffffff;
+}
+
+/* === CHERRY BLOSSOMS (Sakura) - decorative, per-section === */
+.blossom {
+    position: fixed;
+    /* fixed to viewport to avoid clipping by section overflow */
+    pointer-events: none;
+    border-radius: 50%;
+    background: transparent;
+    box-shadow: none;
+    transform-origin: center;
+    z-index: 999;
+    /* above page content but below fixed nav (nav z-index:1000) */
+    will-change: transform, opacity;
+    overflow: visible;
+}
+
+/* Petal SVG sizing and visual treatment */
+.blossom svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform-origin: center;
+}
+
+.blossom .petal {
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.12));
+    opacity: 0.98;
+}
+
+
+@keyframes blossom-fall {
+    0% {
+        transform: translateY(var(--b-start-y, -10vh)) translateX(var(--b-start-x, 0px)) rotate(var(--b-rot-start, 0deg)) scale(var(--b-scale, 1));
+        opacity: 1;
+    }
+
+    60% {
+        opacity: 0.95;
+    }
+
+    100% {
+        transform: translateY(var(--b-end-y, 110vh)) translateX(var(--b-drift, 40px)) rotate(var(--b-rot-end, 360deg)) scale(calc(var(--b-scale, 1) * 0.95));
+        opacity: 0;
+    }
+}
+
+@keyframes blossom-sway {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(var(--b-sway, -12px));
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Default animation wrapper combining fall and a subtle sway; both use CSS vars for per-blossom control */
+.blossom {
+    animation: blossom-fall var(--b-duration, 8s) linear forwards, blossom-sway calc(var(--b-duration, 8s) * 0.4) ease-in-out infinite;
+}
+
+/* --- Footer --- */
+footer {
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 40px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+
+/* Smaller blossoms look better on phones, and reduce total animation for performance */
+@media (max-width: 768px) {
+    .blossom {
+        display: none;
+    }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .blossom {
+        animation: none !important;
+        display: none !important;
+    }
+}
+
+/* --- HERO SEKTION --- */
+.hero-section {
+    height: 100vh;
+    /* Der Hintergrund sollte zum Thema Tokio passen */
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.9)), url('images/tokyo-skyline-full-1920.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-section h1 {
+    font-size: 5.5em;
+    margin: 0;
+    color: #e22b86;
+    /* Hauptfarbe */
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+}
+
+.hero-section p {
+    font-size: 1.5em;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+.cta-button {
+    text-decoration: none;
+    color: white;
+    background-color: #e22b86;
+    /* Hauptakzentfarbe */
+    padding: 15px 30px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.cta-button:hover {
+    background-color: #c72474;
+    /* Dunklerer Ton beim Hover */
+}
+
+#map {
+    height: 800px;
+    width: 100%;
+    border-radius: 12px;
+    border: 2px solid #e22b86;
+    /* Dein Pink-Akzent */
+    margin: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+/* Verhindert, dass der Text im Info-Fenster unsichtbar wird (Google nutzt dort Weiß als BG) */
+.gm-style-iw-d {
+    color: #1a1a1a !important;
+}
+
+.map-wrapper {
+    /* Basis-Styling für runde Ecken */
+    border-radius: 20px;
+    overflow: hidden;
+    line-height: 0;
+    margin: 30px auto;
+    /* Etwas Abstand nach oben/unten */
+
+    /* DER NEON-EFFEKT */
+    /* 1. Der "glühende Draht" - der physische Rand */
+    border: 3px solid #e22b86;
+
+    /* 2. Das "Licht" - mehrere Schichten Schatten */
+    box-shadow:
+        0 0 10px rgba(226, 43, 134, 0.8),
+        /* Innerer, intensiver Schein */
+        0 0 30px rgba(226, 43, 134, 0.5),
+        /* Mittlerer Schein */
+        0 0 60px rgba(226, 43, 134, 0.2),
+        /* Äußerer, weicher Halo */
+        inset 0 0 15px rgba(226, 43, 134, 0.3);
+    /* Leichter Schein nach innen auf die Karte */
+
+    transition: all 0.4s ease-in-out;
+    /* Für den Hover-Effekt */
+}
+
+/* Optional: Ein "Pulsieren" beim Drüberfahren mit der Maus */
+.map-wrapper:hover {
+    box-shadow:
+        0 0 20px rgba(226, 43, 134, 1),
+        0 0 50px rgba(226, 43, 134, 0.7),
+        0 0 100px rgba(226, 43, 134, 0.4),
+        inset 0 0 25px rgba(226, 43, 134, 0.5);
+    border-color: #ff5ba8;
+    /* Der Rand wird etwas heller/weißer */
+}
+
+/* Sicherstellen, dass das Iframe keine eigenen Ränder hat */
+.iframe {
+    border: none !important;
+    width: 100%;
+    height: 450px;
+    /* Oder deine gewünschte Höhe */
+}
+
+/* --- RESPONSIVE BILDER: DESKTOP (1920er WebP-Versionen) --- */
+/* Behält die bereitgestellten URLs bei, ergänzt die lokalen Pfade */
+
+#bg-chiyoda {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Chiyoda_Tokyo_August_Tokyo_Imperial_Palace_2014_67.JPG/2560px-Chiyoda_Tokyo_August_Tokyo_Imperial_Palace_2014_67.webp');
+}
+
+#bg-chuo {
+    background-image: url('https://images.unsplash.com/photo-1606625539830-b4743fa85941?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.webp');
+}
+
+#bg-minato {
+    background-image: url('https://images.unsplash.com/photo-1744999799932-65d6b70ba631?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.webp');
+}
+
+#bg-shinjuku {
+    background-image: url('https://images.unsplash.com/photo-1551321850-378113a4155b?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D.webp');
+}
+
+#bg-bunkyo {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/44/Tokyo_Dome_at_night%3B_April_2010.jpg');
+}
+
+#bg-taito {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/b/bd/20130930_10_Tokyo_-_Ueno_Park_%2810377714466%29.jpg');
+}
+
+#bg-sumida {
+    background-image: url('https://images.unsplash.com/photo-1614932750312-440cdfc45fea?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-koto {
+    background-image: url('https://images.unsplash.com/photo-1707365782267-eb5583f8c361?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-shinagawa {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/Aquaparkshinagawa_Dolphin_Show.jpg');
+}
+
+#bg-meguro {
+    background-image: url('https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-ota {
+    background-image: url('https://images.unsplash.com/photo-1590452777116-6184563fe341?q=80&w=1172&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-setagaya {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Along_Tamagawa_river_near_Tamagawa_station_10.jpg/2560px-Along_Tamagawa_river_near_Tamagawa_station_10.jpg');
+}
+
+#bg-shibuya {
+    background-image: url('https://plus.unsplash.com/premium_photo-1661902398022-762e88ff3f82?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-nakano {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/66/Broadway_Arcade_Nakano_Tokyo.jpg');
+}
+
+#bg-suginami {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/d/df/Zenpukuji_Park_-_Suginami%2C_Tokyo_-_DSC01690.JPG/2560px-Zenpukuji_Park_-_Suginami%2C_Tokyo_-_DSC01690.JPG');
+}
+
+#bg-toshima {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Sunshine_City_2012.JPG/2560px-Sunshine_City_2012.JPG');
+}
+
+#bg-kita {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/2/2b/Asukayama_Park%2C_-April_2009_a.jpg');
+}
+
+#bg-arakawa {
+    background-image: url('https://rimage.gnst.jp/livejapan.com/public/article/detail/a/00/02/a0002324/img/basic/a0002324_main.jpg?20240202122600&q=80');
+}
+
+#bg-itabashi {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Itabashi_Hanabi_Taikai_Zenkei_3_20170805.jpg/2560px-Itabashi_Hanabi_Taikai_Zenkei_3_20170805.jpg');
+}
+
+#bg-nerima {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/TOEI_ANIMATION_Oizumi_Studio.JPG/2560px-TOEI_ANIMATION_Oizumi_Studio.JPG');
+}
+
+#bg-katsushika {
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Red_Japanese_temple_%28Unsplash%29.jpg/2560px-Red_Japanese_temple_%28Unsplash%29.jpg');
+}
+
+#bg-adachi {
+    background-image: url('https://images.unsplash.com/photo-1753964214651-9ede556c2d01?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+}
+
+#bg-edogawa {
+    background-image: url('https://trailrewind.com/2020-03-20/20200320_172801.jpg');
+}
+
+
+/* ================================================================= */
+/* 2. MEDIA QUERIES: OPTIMIERUNG FÜR TABLETS & MOBILGERÄTE (< 768px) */
+/* Parallax deaktiviert. Kleine Bilder (ca. 900px WebP) */
+/* ================================================================= */
+
+@media screen and (max-width: 768px) {
+    .parallax-group {
+        height: auto;
+        min-height: 50vh;
+        transform-style: flat;
+        padding: 30px 0;
+        background-color: #0d0d0d;
+    }
+
+    .parallax-layer {
+        padding: 30px 18px;
+    }
+
+    /* example mobile adjustments */
+    .background-img {
+        background-position: 50% 20%;
+    }
+}
+
+
+/* ================================================== */
+/* 3. MEDIA QUERY: OPTIMIERUNG FÜR SMARTPHONES (< 480px) */
+/* ================================================== */
+
+@media screen and (max-width: 480px) {
+    .hero-section h1 {
+        font-size: 2em;
+    }
+
+    .hero-section p {
+        font-size: 1em;
+    }
+
+    .foreground-content h2 {
+        font-size: 1.6em;
+    }
+
+    .background-img {
+        height: 20vh;
+    }
+}
+
+/* Enable fixed background on desktop for a stronger parallax fallback */
+@media screen and (min-width: 769px) {
+    .background-img {
+        background-attachment: fixed;
+    }
+}
+
+/* --- Globale Stile & Basis-Layout --- */
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding-top: 60px;
+    /* Platz für die fixierte Navigationsleiste */
+    color: #ffffff;
+    box-sizing: border-box;
+    background-image: url("https://bit.ly/43Kdzup");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+/* --- Navigation Styling (komplett überarbeitet für aufklappbares Menü) --- */
+/* .site-nav kept for compatibility with older markup */
+.navbar,
+.site-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(226, 43, 134, 0.4);
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    /* must be above .parallax-layer */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.nav-branding {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-menu {
+    display: flex;
+    /* Links nebeneinander auf Desktop */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hamburger-Menü Styling (Standardmäßig versteckt auf Desktop) */
+/* Keep both .hamburger and .burger variants working if needed */
+.hamburger,
+.burger {
+    display: none;
+    /* Auf dem Desktop ausblenden */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+    /* Sorgt dafür, dass der Button über dem Menü liegt */
+}
+
+/* support older .hamburger span markup and new .bar markup */
+.hamburger span,
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* alias for previous is-active selectors */
+.hamburger.is-active span:nth-child(1),
+.hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.is-active span:nth-child(2),
+.hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.is-active span:nth-child(3),
+.hamburger.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Ensure parallax layers sit behind nav - keep original */
+.parallax-layer {
+    z-index: 0;
+}
+
+/* --- Hauptinhalts-Container --- */
+.second-bg {
+    max-width: 800px;
+    width: 90%;
+    padding: 20px;
+    border: 2px solid #e22b86;
+    margin: 60px auto 30px auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+/* --- Responsive Nav (mobile) --- */
+@media screen and (max-width: 768px) {
+
+    /* show hamburger */
+    .hamburger,
+    .burger {
+        display: block;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        /* Versteckt das Menü außerhalb des Viewports */
+        top: 70px;
+        /* Anpassung an die Höhe des Headers */
+        flex-direction: column;
+        background-color: rgba(226, 43, 134, 0.75);
+        /* Menü-Hintergrundfarbe */
+        width: 100%;
+        height: 100vh;
+        /* Nimmt die gesamte Höhe des Viewports ein */
+        text-align: center;
+        transition: all 0.5s ease;
+        padding-top: 0%;
+        z-index: 999;
+    }
+
+    .nav-item {
+        margin: 0.9rem 0;
+        /* Vertikaler Abstand zwischen den Links */
+    }
+
+    .nav-link {
+        font-size: 1.5rem;
+        /* Größere Schrift für bessere Bedienbarkeit */
+    }
+
+    /* This class is toggled by JS to open the menu */
+    .nav-menu.active {
+        left: 0;
+    }
+
+    /* Animation for the hamburger icon when the menu is active */
+    .hamburger.active .bar:nth-child(2),
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1),
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3),
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}

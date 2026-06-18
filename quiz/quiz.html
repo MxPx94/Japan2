@@ -1,21 +1,56 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Japan Quiz</title>
     <link rel="stylesheet" href="quiz-style.css">
 </head>
-<body>
-    <nav class="main-nav">
-        <a href="../index.html">Startseite</a>
-        <a href="../reiseplaner/index.html">Reiseplaner</a>
-        <a href="../interaktive-karte/index.html">Interaktive Karte</a>
-        <a href="#">Japan Quiz</a>
-        <a href="../woerterbuch/index.html">Wörterbuch</a>
-        <a href="../impressum/index.html">Impressum</a>
-    </nav>
 
+<body>
+    <nav class="navbar">
+        <a href="../index.html" class="nav-branding">Japan Reiseplaner</a>
+
+        <button class="hamburger" aria-label="Menü öffnen">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="../index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="../index.html#tokyo" class="nav-link">Tokio</a>
+            </li>
+            <li class="nav-item">
+                <a href="../index.html#kyoto" class="nav-link">Kyoto</a>
+            </li>
+            <li class="nav-item">
+                <a href="../index.html#koyasan" class="nav-link">Koyasan</a>
+            </li>
+            <li class="nav-item">
+                <a href="../gallery.html" class="nav-link">Galerie</a>
+            </li>
+            <li class="nav-item">
+                <a href="../Tokyo-Districts/tokyo-districts.html" class="nav-link">Top 5</a>
+            </li>
+            <li class="nav-item">
+                <a href="../Japan Reiseplaner.html" class="nav-link">Reiseplaner</a>
+            </li>
+            <li class="nav-item">
+                <a href="../currency-converter.html" class="nav-link">Währungsrechner</a>
+            </li>
+            <li class="nav-item">
+                <a href="./quiz/quiz.html" class="nav-link">Japan Quiz</a>
+            </li>
+            <li class="nav-item">
+                <a href="../visitenkarte.html" class="nav-link">Visitenkarte</a>
+            </li>
+        </ul>
+    </nav>
     <div class="quiz-container">
         <h1>Japan Quiz</h1>
 
@@ -27,7 +62,7 @@
             </div>
             <h2 id="question-text"></h2>
             <div id="options-container" class="options-container">
-                </div>
+            </div>
             <button id="next-button" class="quiz-button">Nächste Frage</button>
         </div>
 
@@ -37,16 +72,17 @@
             <div class="highscore-display">
                 <h3>Highscores</h3>
                 <ul id="highscore-list">
-                    </ul>
+                </ul>
             </div>
             <button id="restart-button" class="quiz-button">Neues Spiel</button>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2025 Dein Name. Alle Rechte vorbehalten.</p>
+        <p><small>&copy; [2025] Max Px</small></p>
     </footer>
 
     <script type="module" src="quiz.js"></script>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,50 @@
     <link rel="stylesheet" href="currency-styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <nav class="main-nav">
-        <a href="index.html">Home</a>
+    <nav class="navbar">
+        <a href="./index.html" class="nav-branding">Japan Reiseplaner</a>
+
+        <button class="hamburger" aria-label="Menü öffnen">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="./index.html" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="./index.html#tokyo" class="nav-link">Tokio</a>
+            </li>
+            <li class="nav-item">
+                <a href="./index.html#kyoto" class="nav-link">Kyoto</a>
+            </li>
+            <li class="nav-item">
+                <a href="./index.html#koyasan" class="nav-link">Koyasan</a>
+            </li>
+            <li class="nav-item">
+                <a href="./gallery.html" class="nav-link">Galerie</a>
+            </li>
+            <li class="nav-item">
+                <a href="./Tokyo-Districts/tokyo-districts.html" class="nav-link">Top 5</a>
+            </li>
+            <li class="nav-item">
+                <a href="./Japan Reiseplaner.html" class="nav-link">Reiseplaner</a>
+            </li>
+            <li class="nav-item">
+                <a href="./currency-converter.html" class="nav-link">Währungsrechner</a>
+            </li>
+            <li class="nav-item">
+                <a href="./quiz/quiz.html" class="nav-link">Japan Quiz</a>
+            </li>
+            <li class="nav-item">
+                <a href="./visitenkarte.html" class="nav-link">Visitenkarte</a>
+            </li>
+        </ul>
     </nav>
 
     <main>
@@ -19,7 +60,8 @@
             <div class="converter-card">
                 <div class="form-group">
                     <label for="jpyAmount">Betrag in JPY:</label>
-                    <input type="number" id="jpyAmount" class="form-input" min="0" value="1000" placeholder="Betrag in JPY eingeben">
+                    <input type="number" id="jpyAmount" class="form-input" min="0" value="1000"
+                        placeholder="Betrag in JPY eingeben">
                 </div>
 
                 <div class="form-group">
@@ -51,4 +93,5 @@
 
     <script src="currency-converter.js"></script>
 </body>
+
 </html>

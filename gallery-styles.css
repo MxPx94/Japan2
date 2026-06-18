@@ -2,26 +2,104 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    margin: 0; /* Standard-Margin des Browsers entfernen */
-    padding-top: 60px; /* Platz für die fixierte Navigationsleiste */
-    color: #ffffff; /* Allgemeine Textfarbe für die Seite */
-    box-sizing: border-box; /* Padding wird in der Gesamtgröße berücksichtigt */
-    min-height: 100vh; /* Mindesthöhe des Viewports */
+    margin: 0;
+    /* Standard-Margin des Browsers entfernen */
+    padding-top: 0px;
+    /* Platz für die fixierte Navigationsleiste */
+    color: #ffffff;
+    /* Allgemeine Textfarbe für die Seite */
+    box-sizing: border-box;
+    /* Padding wird in der Gesamtgröße berücksichtigt */
+    min-height: 100vh;
+    /* Mindesthöhe des Viewports */
+}
+
+/* --- Navigation Styling (komplett überarbeitet für aufklappbares Menü) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(226, 43, 134, 0.4);
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.nav-branding {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-menu {
+    display: flex;
+    /* Links nebeneinander auf Desktop */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hamburger-Menü Styling (Standardmäßig versteckt auf Desktop) */
+.hamburger {
+    display: none;
+    /* Auf dem Desktop ausblenden */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+    /* Sorgt dafür, dass der Button über dem Menü liegt */
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
 }
 
 /* Hintergrundbild auf dem HTML-Element, damit es den ganzen Viewport ausfüllt */
 html {
-    background-image: url("https://bit.ly/43Kdzup"); /* Tokyo Tower Bild von Unsplash */
+    background-image: url("https://bit.ly/43Kdzup");
+    /* Tokyo Tower Bild von Unsplash */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100%; /* Stellt sicher, dass das HTML-Element den gesamten Viewport einnimmt */
+    min-height: 100%;
+    /* Stellt sicher, dass das HTML-Element den gesamten Viewport einnimmt */
 }
 
 /* Allgemeine Link-Stile für den Inhalt */
 a {
-    color: #e22b86; /* Rosa Farbe für Links im Inhalt */
+    color: #e22b86;
+    /* Rosa Farbe für Links im Inhalt */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -32,9 +110,12 @@ a:hover {
 
 /* Hauptinhaltsbereich */
 main {
-    max-width: 1200px; /* Maximale Breite für den Hauptinhalt */
-    margin: 20px auto; /* Horizontal zentriert */
-    padding: 0 20px; /* Innenabstand an den Seiten */
+    max-width: 1200px;
+    /* Maximale Breite für den Hauptinhalt */
+    margin: 20px auto;
+    /* Horizontal zentriert */
+    padding: 0 20px;
+    /* Innenabstand an den Seiten */
 }
 
 /* Überschriften-Stile */
@@ -43,17 +124,20 @@ h2 {
     color: #ffffff;
     text-align: center;
     text-shadow: 2px 2px 4px #000000;
-    margin-bottom: 30px; /* Abstand unter Überschriften */
+    margin-bottom: 30px;
+    /* Abstand unter Überschriften */
 }
 
 h1 {
     font-size: 3em;
-    margin-top: 40px; /* Abstand nach der Navigationsleiste */
+    margin-top: 40px;
+    /* Abstand nach der Navigationsleiste */
 }
 
 h2 {
     font-size: 2em;
-    margin-top: 50px; /* Abstand zwischen den Sektionen */
+    margin-top: 50px;
+    /* Abstand zwischen den Sektionen */
 }
 
 /* Footer */
@@ -64,7 +148,7 @@ footer {
     margin-top: 40px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
 }
 
@@ -72,14 +156,15 @@ footer {
 .main-nav {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(226, 43, 134, 0.4); /* Etwas weniger transparent für bessere Sichtbarkeit */
+    background-color: rgba(226, 43, 134, 0.4);
+    /* Etwas weniger transparent für bessere Sichtbarkeit */
     padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     flex-wrap: wrap;
     box-sizing: border-box;
 }
@@ -92,7 +177,8 @@ footer {
     transition: background-color 0.3s ease;
     border-radius: 5px;
     white-space: nowrap;
-    flex-grow: 1; /* Lässt Links wachsen (Desktop) */
+    flex-grow: 1;
+    /* Lässt Links wachsen (Desktop) */
     text-align: center;
 }
 
@@ -105,57 +191,83 @@ footer {
     background-color: rgba(0, 0, 0, 0.7);
     padding: 25px;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     border: 2px solid #e22b86;
     margin-bottom: 40px;
-    text-align: center; /* Zentriert den Inhalt der Sektion */
+    text-align: center;
+    /* Zentriert den Inhalt der Sektion */
 }
 
 .map-container {
-    position: relative; /* Wichtig: Ermöglicht die Positionierung der Hotspots absolut zu diesem Container */
-    max-width: 350px; /* Maximale Breite der Karte */
-    margin: 20px auto; /* Zentriert den Karten-Container */
-    overflow: hidden; /* Stellt sicher, dass nichts überläuft */
+    position: relative;
+    /* Wichtig: Ermöglicht die Positionierung der Hotspots absolut zu diesem Container */
+    max-width: 350px;
+    /* Maximale Breite der Karte */
+    margin: 20px auto;
+    /* Zentriert den Karten-Container */
+    overflow: hidden;
+    /* Stellt sicher, dass nichts überläuft */
     border-radius: 8px;
 }
 
 .japan-map-image {
-    width: 100%; /* Bild füllt den Container aus */
+    width: 100%;
+    /* Bild füllt den Container aus */
     height: auto;
-    display: block; /* Entfernt zusätzlichen Platz unter dem Bild */
+    display: block;
+    /* Entfernt zusätzlichen Platz unter dem Bild */
     border-radius: 8px;
 }
 
 .map-hotspot {
-    position: absolute; /* Positioniert die Buttons relativ zum .map-container */
-    background-color: rgba(226, 43, 134, 0.8); /* Rosa-Hintergrund */
+    position: absolute;
+    /* Positioniert die Buttons relativ zum .map-container */
+    background-color: rgba(226, 43, 134, 0.8);
+    /* Rosa-Hintergrund */
     color: white;
     border: 2px solid #fff;
-    border-radius: 50%; /* Runde Buttons */
-    width: 50px; /* Feste Breite */
-    height: 50px; /* Feste Höhe */
-    display: flex; /* Für Zentrierung des Textes */
-    justify-content: center; /* Text horizontal zentrieren */
-    align-items: center; /* Text vertikal zentrieren */
+    border-radius: 50%;
+    /* Runde Buttons */
+    width: 50px;
+    /* Feste Breite */
+    height: 50px;
+    /* Feste Höhe */
+    display: flex;
+    /* Für Zentrierung des Textes */
+    justify-content: center;
+    /* Text horizontal zentrieren */
+    align-items: center;
+    /* Text vertikal zentrieren */
     font-weight: bold;
     font-size: 0.65em;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
-    z-index: 10; /* Stellt sicher, dass sie über dem Bild liegen */
-    text-indent: -9999px; /* Text ausblenden, wenn Icons verwendet werden */
-    overflow: hidden; /* Überlaufende Inhalte verbergen */
-    background-size: 70%; /* Größe des Icons im Button */
+    z-index: 10;
+    /* Stellt sicher, dass sie über dem Bild liegen */
+    text-indent: -9999px;
+    /* Text ausblenden, wenn Icons verwendet werden */
+    overflow: hidden;
+    /* Überlaufende Inhalte verbergen */
+    background-size: 70%;
+    /* Größe des Icons im Button */
     background-repeat: no-repeat;
-    background-position: center; /* Zentriert das Icon im Button */
-    background-color: rgba(255, 255, 255, 0.4); /* Behalte die Hintergrundfarbe für den Button */
-    transform: translate(-50%, -50%); /* Zentriert den Hotspot um seinen 'top'/'left' Punkt */
+    background-position: center;
+    /* Zentriert das Icon im Button */
+    background-color: rgba(255, 255, 255, 0.4);
+    /* Behalte die Hintergrundfarbe für den Button */
+    transform: translate(-50%, -50%);
+    /* Zentriert den Hotspot um seinen 'top'/'left' Punkt */
 }
 
 .map-hotspot:hover {
-    background-color: rgba(255, 255, 255, 0.9); /* Weiß beim Hover */
-    color: #e22b86; /* Rosa Text beim Hover */
-    border-color: #e22b86; /* Rosa Rand beim Hover */
-    transform: translate(-50%, -50%) scale(1.1); /* Leichte Vergrößerung beim Hover */
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Weiß beim Hover */
+    color: #e22b86;
+    /* Rosa Text beim Hover */
+    border-color: #e22b86;
+    /* Rosa Rand beim Hover */
+    transform: translate(-50%, -50%) scale(1.1);
+    /* Leichte Vergrößerung beim Hover */
 }
 
 /* Spezifische Positionen und Icon-Bilder für die Hotspots */
@@ -174,7 +286,7 @@ footer {
 #hotspotHokkaido {
     top: 20%;
     left: 80%;
-    background-image: url('./img/Hokkaido-Icon.png'); 
+    background-image: url('./img/Hokkaido-Icon.png');
 }
 
 #hotspotOkinawa {
@@ -191,17 +303,20 @@ footer {
     border-radius: 5px;
     margin-top: 20px;
     font-size: 1.1em;
-    min-height: 80px; /* Mindesthöhe, um Springen zu vermeiden */
+    min-height: 80px;
+    /* Mindesthöhe, um Springen zu vermeiden */
     display: flex;
     align-items: center;
     justify-content: center;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 /* Stil für den aktivierten Hotspot (optional) */
 .map-hotspot.active {
-    background-color: #ffd700; /* Gold */
-    color: #e22b86; /* Rosa Text */
+    background-color: #ffd700;
+    /* Gold */
+    color: #e22b86;
+    /* Rosa Text */
     border-color: #e22b86;
     box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
 }
@@ -213,14 +328,18 @@ footer {
 .grid-container-2x2,
 .grid-container-gallery {
     display: grid;
-    gap: 20px; /* Abstand zwischen den Grid-Items */
+    gap: 20px;
+    /* Abstand zwischen den Grid-Items */
     margin-bottom: 40px;
-    background-color: rgba(0, 0, 0, 0.7); /* Etwas dunklerer Hintergrund */
-    padding: 25px; /* Reduziertes Padding */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Etwas dunklerer Hintergrund */
+    padding: 25px;
+    /* Reduziertes Padding */
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
     border: 2px solid #e22b86;
-    justify-content: center; /* Zentriert Items, wenn es weniger sind als Spalten */
+    justify-content: center;
+    /* Zentriert Items, wenn es weniger sind als Spalten */
 }
 
 .grid-container-2x2 {
@@ -237,23 +356,27 @@ footer {
 .grid-item {
     border-radius: 8px;
     overflow: hidden;
-    background-color: rgba(0, 0, 0, 0.1); /* Leichter transparenter Hintergrund */
-    border: 1px solid rgba(226, 43, 134, 0.5); /* Rosa Rand */
+    background-color: rgba(0, 0, 0, 0.1);
+    /* Leichter transparenter Hintergrund */
+    border: 1px solid rgba(226, 43, 134, 0.5);
+    /* Rosa Rand */
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .grid-item:hover {
-    transform: translateY(-5px); /* Leichter Hover-Effekt */
+    transform: translateY(-5px);
+    /* Leichter Hover-Effekt */
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
 
 .grid-item img {
     width: 100%;
-    height: 200px; /* Standardhöhe für Bilder */
+    height: 200px;
+    /* Standardhöhe für Bilder */
     object-fit: cover;
     display: block;
     border-bottom: 1px solid rgba(226, 43, 134, 0.5);
@@ -263,14 +386,18 @@ footer {
 .grid-item p {
     padding: 10px;
     margin: 0;
-    color: #ffffff; /* Textfarbe weiß */
+    color: #ffffff;
+    /* Textfarbe weiß */
     font-size: 1.1em;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-    flex-grow: 1; /* Lässt den Textbereich wachsen */
+    flex-grow: 1;
+    /* Lässt den Textbereich wachsen */
     display: flex;
-    align-items: center; /* Vertikale Zentrierung */
-    justify-content: center; /* Horizontale Zentrierung */
+    align-items: center;
+    /* Vertikale Zentrierung */
+    justify-content: center;
+    /* Horizontale Zentrierung */
 }
 
 
@@ -286,126 +413,64 @@ footer {
     h1 {
         font-size: 2.8em;
     }
+
     h2 {
         font-size: 1.8em;
     }
-
-    .grid-container-2x2,
-    .grid-container-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Etwas kleinere Min-Breite */
-        padding: 20px;
-        gap: 15px;
-    }
-
-    .grid-item img {
-        height: 180px; /* Bilder etwas kleiner */
-    }
 }
 
-/* Für Bildschirme bis 768px Breite (Tablets und kleinere Desktops) */
-@media (max-width: 768px) {
-    body {
-        padding-top: 60px; /* Beibehalten, da die Navigationsleiste nicht über die volle Breite des Viewports geht */
+/* --- Media Queries für Responsivität (aktualisiert) --- */
+
+@media screen and (max-width: 768px) {
+
+    /* Zeigt das Hamburger-Icon an und versteckt die Navigationsliste */
+    .hamburger {
+        display: block;
     }
 
-    /* Navigation Anpassung für mittige Buttons */
-    .main-nav {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        /* Versteckt das Menü außerhalb des Viewports */
+        top: 70px;
+        /* Anpassung an die Höhe des Headers */
         flex-direction: column;
-        padding: 5px 0;
-        align-items: center; /* Zentriert die gestapelten Links horizontal */
+        background-color: rgba(226, 43, 134, 0.75);
+        /* Menü-Hintergrundfarbe */
+        width: 100%;
+        height: 100vh;
+        /* Nimmt die gesamte Höhe des Viewports ein */
+        text-align: center;
+        transition: all 0.5s ease;
+        /* Sanfte Animation beim Aufklappen */
+        padding-top: 0%;
     }
 
-    .main-nav a {
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        flex-grow: 0;
-        width: 80%;
-        max-width: 250px;
-        margin: 5px auto;
+    .nav-item {
+        margin: 0.9rem 0;
+        /* Vertikaler Abstand zwischen den Links */
     }
 
-    .main-nav a:last-child {
-        border-bottom: none;
+    .nav-link {
+        font-size: 1.5rem;
+        /* Größere Schrift für bessere Bedienbarkeit */
     }
 
-    h1 {
-        font-size: 2.2em;
-        margin-top: 10px;
-    }
-    h2 {
-        font-size: 1.6em;
+    /* Diese Klasse wird mit JavaScript hinzugefügt, um das Menü aufzuklappen */
+    .nav-menu.active {
+        left: 0;
     }
 
-    main {
-        padding: 0 10px;
+    /* Animation für das Hamburger-Icon, wenn das Menü geöffnet ist */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
     }
 
-    .map-hotspot { /* Media Query für Karte, um Hotspots zu skalieren */
-        width: 50px;
-        height: 50px;
-        font-size: 0.8em;
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
     }
 
-    .grid-container-2x2,
-    .grid-container-gallery {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* 2 Spalten auf Tablets */
-        padding: 15px;
-        gap: 10px;
-    }
-
-    .grid-item img {
-        height: 160px; /* Bilder noch kleiner */
-    }
-
-    .grid-item p {
-        font-size: 1em;
-    }
-}
-
-/* Für sehr kleine Bildschirme (Mobile Phones) */
-@media (max-width: 480px) {
-    body {
-        padding-top: 80px; /* Mehr Platz, da Navigationslinks ggf. 2 Zeilen einnehmen */
-    }
-
-    /* Navigation Anpassung für sehr kleine Bildschirme */
-    .main-nav a {
-        padding: 8px 5px;
-        font-size: 0.9em;
-        width: 90%;
-        max-width: 200px;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-    h2 {
-        font-size: 1.3em;
-    }
-
-    .map-hotspot { /* Media Query für Karte, um Hotspots zu skalieren */
-        width: 40px;
-        height: 40px;
-        font-size: 0.7em;
-    }
-
-    .grid-container-2x2,
-    .grid-container-gallery {
-        grid-template-columns: 1fr; /* Eine einzige Spalte auf Mobiltelefonen */
-        padding: 10px;
-        gap: 10px;
-    }
-
-    .grid-item img {
-        height: 140px; /* Bilder kleiner auf Mobile */
-    }
-
-    .grid-item p {
-        font-size: 0.9em;
-    }
-
-    footer {
-        padding: 10px 0;
-        font-size: 0.8em;
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
     }
 }

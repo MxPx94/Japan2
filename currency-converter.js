@@ -1,17 +1,40 @@
-    
-    // =======================================================
-    // === Tag 40-42: Micro-Projekt 5: "Japanischer Währungsrechner" (JETZT NUR AUF SEINER EIGENEN SEITE) ===
-    // =======================================================
+// =======================================================
+// === Hauptskript-Container: Wartet auf das Laden des DOMs ===
+// =======================================================
+document.addEventListener('DOMContentLoaded', function() {
 
-    // Überprüfen, ob die Elemente für den Währungsrechner auf der aktuellen Seite existieren
+    // =======================================================
+    // === JavaScript für das aufklappbare Menü ===
+    // =======================================================
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+
+
+    // =======================================================
+    // === Währungsrechner-Logik (unverändert) ===
+    // =======================================================
     const jpyAmountInput = document.getElementById('jpyAmount');
     const convertButton = document.getElementById('convertButton');
 
-    if (jpyAmountInput && convertButton) { // Nur ausführen, wenn die Elemente vorhanden sind
+    if (jpyAmountInput && convertButton) {
         console.log('\n=== Tag 40-42: Japanischer Währungsrechner (auf eigener Seite) ===');
 
-        // WICHTIG: Ersetze 'YOUR_API_KEY' durch deinen tatsächlichen API-Schlüssel von exchangerate-api.com
-        const API_KEY = 'de5607a89d06da3187884c00'; // <<< HIER DEINEN API-SCHLÜSSEL EINFÜGEN!
+        const API_KEY = 'de5607a89d06da3187884c00';
         const API_BASE_URL = `https://v6.exchangerate-api.com/v6/${API_KEY}/latest/JPY`;
 
         const FALLBACK_RATES = {
@@ -98,6 +121,6 @@
             radio.addEventListener('change', convertCurrency);
         });
 
-        // Beim Start der Seite einmal umrechnen (mit Standardwerten)
         convertCurrency();
-};
+    }
+});

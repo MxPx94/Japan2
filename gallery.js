@@ -324,4 +324,64 @@ document.addEventListener('DOMContentLoaded', (event) => {
     japanReise.zeigeReiseInfo();
     console.log("Methode 'zeigeReiseInfo()' erfolgreich aufgerufen.");
 
+      // =======================================================
+    // === NEU: JavaScript für das aufklappbare Menü ===
+    // =======================================================
+    
+    // Elemente für die Navigation holen
+    const hamburger = document.querySelector(".hamburger");
+    const navMenu = document.querySelector(".nav-menu");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    // Event Listener für den Klick auf das Hamburger-Menü
+    if (hamburger && navMenu) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("active");
+            navMenu.classList.toggle("active");
+        });
+    }
+
+    // Event Listener für jeden Navigationslink, um das Menü nach dem Klick zu schließen
+    if (navLinks) {
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                // Schließt das Menü nur, wenn es geöffnet ist
+                if (hamburger.classList.contains("active")) {
+                    hamburger.classList.remove("active");
+                    navMenu.classList.remove("active");
+                }
+            });
+        });
+    }
+
+    // Warte, bis das gesamte HTML-Dokument geladen ist
+document.addEventListener('DOMContentLoaded', function() {
+
+    // Wähle das Hamburger-Icon und das Navigationsmenü aus dem DOM aus
+    const hamburger = document.querySelector('.hamburger');
+    const navMenu = document.querySelector('.nav-menu');
+
+    // Überprüfe, ob die Elemente gefunden wurden, bevor du Event-Listener hinzufügst
+    if (hamburger && navMenu) {
+        // Füge einen Event-Listener für Klicks auf das Hamburger-Icon hinzu
+        hamburger.addEventListener('click', () => {
+            // Schalte die CSS-Klasse 'active' für beide Elemente um
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Wähle alle Navigationslinks aus
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        // Füge für jeden Link einen Klick-Listener hinzu
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                // Schließe das Menü, indem die 'active' Klasse entfernt wird
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+});
+
 }); // Ende von DOMContentLoaded

@@ -2,30 +2,108 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
-    margin: 0; /* Entfernt Standard-Margin des Browsers */
-    padding-top: 60px; /* Platz für die fixierte Navigationsleiste */
-    color: #ffffff; /* Allgemeine Textfarbe für die Seite */
-    box-sizing: border-box; /* Padding wird in der Gesamtgröße berücksichtigt */
-    min-height: 100vh; /* Mindesthöhe des Viewports */
+    margin: 0;
+    /* Entfernt Standard-Margin des Browsers */
+    padding-top: 60px;
+    /* Platz für die fixierte Navigationsleiste */
+    color: #ffffff;
+    /* Allgemeine Textfarbe für die Seite */
+    box-sizing: border-box;
+    /* Padding wird in der Gesamtgröße berücksichtigt */
+    min-height: 100vh;
+    /* Mindesthöhe des Viewports */
 
     /* Flexbox für das Body-Element hinzufügen, um Footer am Ende zu fixieren */
     display: flex;
     flex-direction: column;
 }
 
+/* --- Navigation Styling (komplett überarbeitet für aufklappbares Menü) --- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(226, 43, 134, 0.4);
+    padding: 1rem 1.5rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.nav-branding {
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.nav-menu {
+    display: flex;
+    /* Links nebeneinander auf Desktop */
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    margin-left: 1.5rem;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hamburger-Menü Styling (Standardmäßig versteckt auf Desktop) */
+.hamburger {
+    display: none;
+    /* Auf dem Desktop ausblenden */
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+    /* Sorgt dafür, dass der Button über dem Menü liegt */
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 5px auto;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+}
+
 /* Hintergrundbild auf dem HTML-Element, damit es den ganzen Viewport ausfüllt */
 html {
-    background-image: url("https://bit.ly/43Kdzup"); /* Tokyo Tower Bild von Unsplash */
+    background-image: url("https://bit.ly/43Kdzup");
+    /* Tokyo Tower Bild von Unsplash */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 100%; /* Stellt sicher, dass das HTML-Element den gesamten Viewport einnimmt */
+    min-height: 100%;
+    /* Stellt sicher, dass das HTML-Element den gesamten Viewport einnimmt */
 }
 
 /* --- Allgemeine Link-Stile --- */
 a {
-    color: #e22b86; /* Rosa Farbe für Links im Inhalt */
+    color: #e22b86;
+    /* Rosa Farbe für Links im Inhalt */
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -36,13 +114,20 @@ a:hover {
 
 /* --- Hauptinhaltsbereich (main) --- */
 main {
-    max-width: 1200px; /* Maximale Breite für den Hauptinhalt */
-    margin: 20px auto; /* Horizontal zentriert */
-    padding: 0 20px; /* Innenabstand an den Seiten */
-    display: flex; /* Flexbox für Zentrierung der Kinder */
-    flex-direction: column; /* Kinder untereinander anordnen */
-    align-items: center; /* Kinder horizontal zentrieren */
-    flex-grow: 1; /* Lässt den Hauptinhalt wachsen, um den Footer nach unten zu drücken */
+    max-width: 1200px;
+    /* Maximale Breite für den Hauptinhalt */
+    margin: 20px auto;
+    /* Horizontal zentriert */
+    padding: 0 20px;
+    /* Innenabstand an den Seiten */
+    display: flex;
+    /* Flexbox für Zentrierung der Kinder */
+    flex-direction: column;
+    /* Kinder untereinander anordnen */
+    align-items: center;
+    /* Kinder horizontal zentrieren */
+    flex-grow: 1;
+    /* Lässt den Hauptinhalt wachsen, um den Footer nach unten zu drücken */
 }
 
 
@@ -52,32 +137,38 @@ h2 {
     color: #ffffff;
     text-align: center;
     text-shadow: 2px 2px 4px #000000;
-    margin-bottom: 30px; /* Abstand unter Überschriften */
+    margin-bottom: 30px;
+    /* Abstand unter Überschriften */
 }
 
 h1 {
     font-size: 3em;
-    margin-top: 40px; /* Abstand nach der Navigationsleiste */
+    margin-top: 40px;
+    /* Abstand nach der Navigationsleiste */
 }
 
 h2 {
     font-size: 2em;
-    margin-top: 50px; /* Abstand zwischen den Sektionen */
+    margin-top: 50px;
+    /* Abstand zwischen den Sektionen */
 }
 
 /* --- Navigationsleiste --- */
 .main-nav {
     display: flex;
     justify-content: space-around;
-    background-color: rgba(226, 43, 134, 0.6); /* Slightly more opaque for better readability */
+    background-color: rgba(226, 43, 134, 0.6);
+    /* Slightly more opaque for better readability */
     padding: 10px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Stellt sicher, dass die Navigation über anderen Elementen liegt */
+    z-index: 1000;
+    /* Stellt sicher, dass die Navigation über anderen Elementen liegt */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    flex-wrap: wrap; /* Ermöglicht Umbruch auf kleineren Bildschirmen */
+    flex-wrap: wrap;
+    /* Ermöglicht Umbruch auf kleineren Bildschirmen */
     box-sizing: border-box;
 }
 
@@ -88,8 +179,10 @@ h2 {
     font-weight: bold;
     transition: background-color 0.3s ease;
     border-radius: 5px;
-    white-space: nowrap; /* Verhindert Zeilenumbruch innerhalb eines Links */
-    flex-grow: 1; /* Lässt Links auf Desktop-Ansicht wachsen */
+    white-space: nowrap;
+    /* Verhindert Zeilenumbruch innerhalb eines Links */
+    flex-grow: 1;
+    /* Lässt Links auf Desktop-Ansicht wachsen */
     text-align: center;
 }
 
@@ -99,7 +192,8 @@ h2 {
 
 /* --- Stile für allgemeine Inhaltssektionen --- */
 /* Applies to proverbsSection and highlightSection to match planner's aesthetic */
-section[id$="Section"] { /* Targets sections ending with "Section" */
+section[id$="Section"] {
+    /* Targets sections ending with "Section" */
     background-color: rgba(0, 0, 0, 0.7);
     padding: 25px;
     border-radius: 8px;
@@ -116,14 +210,24 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 
 /* Zentrierung des Formulars und der Reiseliste innerhalb der Sektion */
 /* Angepasst, um alle Formulare und Listen einzuschließen */
-#addDestinationForm, #reisezieleListe, #japaneseProverbsList, #restaurantReviewForm {
-    max-width: 500px; /* Begrenzt die Breite des Formulars */
-    margin: 0 auto 20px auto; /* Zentriert das Formular horizontal und gibt unten Abstand */
-    padding: 15px; /* Innenabstand wie zuvor */
-    border: 2px solid #e22b86; /* Rand wie zuvor */
-    border-radius: 10px; /* Abgerundete Ecken wie zuvor */
-    box-sizing: border-box; /* Stellt sicher, dass Padding in der Breite berücksichtigt wird */
-    background-color: rgba(0, 0, 0, 0.7); /* Hintergrundfarbe mit Transparenz */
+#addDestinationForm,
+#reisezieleListe,
+#japaneseProverbsList,
+#restaurantReviewForm {
+    max-width: 500px;
+    /* Begrenzt die Breite des Formulars */
+    margin: 0 auto 20px auto;
+    /* Zentriert das Formular horizontal und gibt unten Abstand */
+    padding: 15px;
+    /* Innenabstand wie zuvor */
+    border: 2px solid #e22b86;
+    /* Rand wie zuvor */
+    border-radius: 10px;
+    /* Abgerundete Ecken wie zuvor */
+    box-sizing: border-box;
+    /* Stellt sicher, dass Padding in der Breite berücksichtigt wird */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Hintergrundfarbe mit Transparenz */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
@@ -131,7 +235,8 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 /* Styling für Formulargruppen (Labels und Inputs zusammen) */
 .form-group {
     margin-bottom: 15px;
-    text-align: left; /* Labels und Inputs links ausrichten */
+    text-align: left;
+    /* Labels und Inputs links ausrichten */
     display: flex;
     flex-direction: column;
 }
@@ -139,19 +244,23 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 .form-group label {
     margin-bottom: 5px;
     font-weight: bold;
-    color: #ffd700; /* Goldene Farbe für Labels */
+    color: #ffd700;
+    /* Goldene Farbe für Labels */
 }
 
 /* Gemeinsamer Stil für alle Input-Felder (Restaurant-Bewertung und Reiseplaner) */
-.form-input { /* Neue Klasse für einheitliche Input-Stile */
+.form-input {
+    /* Neue Klasse für einheitliche Input-Stile */
     padding: 10px 15px;
     border: 1px solid #e22b86;
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.1);
     color: white;
     font-size: 1em;
-    width: 100%; /* Volle Breite innerhalb des Containers */
-    box-sizing: border-box; /* Wichtig für korrekte Breitenberechnung */
+    width: 100%;
+    /* Volle Breite innerhalb des Containers */
+    box-sizing: border-box;
+    /* Wichtig für korrekte Breitenberechnung */
 }
 
 .form-input::placeholder {
@@ -160,7 +269,8 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 
 .form-input:focus {
     outline: none;
-    border-color: #ffd700; /* Gold beim Fokus */
+    border-color: #ffd700;
+    /* Gold beim Fokus */
     box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
 }
 
@@ -169,21 +279,28 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 .travel-input-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Abstand zwischen Input und Button */
+    gap: 10px;
+    /* Abstand zwischen Input und Button */
     margin-bottom: 20px;
-    flex-wrap: wrap; /* Erlaubt Umbruch auf kleinen Bildschirmen */
+    flex-wrap: wrap;
+    /* Erlaubt Umbruch auf kleinen Bildschirmen */
 }
 
-.travel-input-container .form-input { /* Richtet sich an das Input-Feld innerhalb des Containers */
-    width: 250px; /* Feste Breite für Input */
-    max-width: calc(100% - 70px); /* Damit der Button daneben passt auf kleinen Screens */
+.travel-input-container .form-input {
+    /* Richtet sich an das Input-Feld innerhalb des Containers */
+    width: 250px;
+    /* Feste Breite für Input */
+    max-width: calc(100% - 70px);
+    /* Damit der Button daneben passt auf kleinen Screens */
 }
 
 
 /* Vereinheitlichte Button-Stile für alle Submit-Buttons */
-.submit-button, #addDestinationButton {
+.submit-button,
+#addDestinationButton {
     padding: 10px 20px;
-    background-color: #e22b86; /* Rosa */
+    background-color: #e22b86;
+    /* Rosa */
     color: white;
     border: none;
     border-radius: 5px;
@@ -191,22 +308,31 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
     font-size: 1em;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    width: auto; /* Buttons nehmen nur so viel Platz wie nötig ein */
-    margin-top: 10px; /* Abstand nach oben zum Input */
+    width: auto;
+    /* Buttons nehmen nur so viel Platz wie nötig ein */
+    margin-top: 10px;
+    /* Abstand nach oben zum Input */
 }
 
-.submit-button:hover, #addDestinationButton:hover {
-    background-color: #ffd700; /* Gold */
-    color: #000; /* Schwarz */
+.submit-button:hover,
+#addDestinationButton:hover {
+    background-color: #ffd700;
+    /* Gold */
+    color: #000;
+    /* Schwarz */
     transform: translateY(-2px);
 }
 
 .travel-list {
-    list-style: none; /* Entfernt die Standard-Listpunkte */
+    list-style: none;
+    /* Entfernt die Standard-Listpunkte */
     padding: 0;
-    margin: 0 auto; /* Zentriert die Liste */
-    max-width: 500px; /* Maximale Breite für die Liste */
-    text-align: left; /* Text linksbündig in der Liste */
+    margin: 0 auto;
+    /* Zentriert die Liste */
+    max-width: 500px;
+    /* Maximale Breite für die Liste */
+    text-align: left;
+    /* Text linksbündig in der Liste */
 }
 
 .travel-list li {
@@ -215,7 +341,8 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
     padding: 10px 15px;
     margin-bottom: 8px;
     border-radius: 4px;
-    border-left: 3px solid #e22b86; /* Rosa Akzentlinie */
+    border-left: 3px solid #e22b86;
+    /* Rosa Akzentlinie */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -224,9 +351,12 @@ section[id$="Section"] { /* Targets sections ending with "Section" */
 
 /* NEU für Aufgabe 2: Highlight-Klasse */
 .highlight {
-    border: 3px solid #ffd700 !important; /* Goldener Rand */
-    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7) !important; /* Starker goldener Schatten */
-    background-color: rgba(255, 215, 0, 0.1) !important; /* Leichter goldener Hintergrund */
+    border: 3px solid #ffd700 !important;
+    /* Goldener Rand */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.7) !important;
+    /* Starker goldener Schatten */
+    background-color: rgba(255, 215, 0, 0.1) !important;
+    /* Leichter goldener Hintergrund */
 }
 
 /* Stil für die Highlight Box selbst */
@@ -244,7 +374,8 @@ footer {
     color: white;
     text-align: center;
     padding: 15px 0;
-    margin-top: 40px; /* Beibehalten für Abstand zum Inhalt */
+    margin-top: 40px;
+    /* Beibehalten für Abstand zum Inhalt */
     width: 100%;
     background-color: rgba(0, 0, 0, 0.4);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
@@ -263,119 +394,88 @@ footer {
     h1 {
         font-size: 2.8em;
     }
+
     h2 {
         font-size: 1.8em;
     }
 }
 
-/* Für Bildschirme bis 768px Breite (Tablets und kleinere Desktops) */
-@media (max-width: 768px) {
-    body {
-        padding-top: 60px;
+/* --- Media Queries für Responsivität (aktualisiert) --- */
+
+@media screen and (max-width: 768px) {
+
+    /* Zeigt das Hamburger-Icon an und versteckt die Navigationsliste */
+    .hamburger {
+        display: block;
     }
 
-    /* Navigation Anpassung für mittige Buttons */
-    .main-nav {
+    .nav-menu {
+        position: fixed;
+        left: -100%;
+        /* Versteckt das Menü außerhalb des Viewports */
+        top: 70px;
+        /* Anpassung an die Höhe des Headers */
         flex-direction: column;
-        padding: 5px 0;
-        align-items: center; /* Zentriert die gestapelten Links horizontal */
-    }
-
-    .main-nav a {
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        flex-grow: 0;
-        width: 80%;
-        max-width: 250px;
-        margin: 5px auto;
-    }
-
-    .main-nav a:last-child {
-        border-bottom: none;
-    }
-
-    h1 {
-        font-size: 2.2em;
-        margin-top: 10px;
-    }
-    h2 {
-        font-size: 1.6em;
-    }
-
-    main {
-        padding: 0 10px;
-    }
-
-    /* Anpassung für den Reiseplaner auf kleineren Bildschirmen */
-    .travel-input-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    /* Gemeinsamer Stil für alle Input-Felder im Reiseplaner für kleinere Bildschirme */
-    .travel-input-container .form-input, /* Hier auch .form-input verwendet */
-    .travel-input-container textarea,
-    #addDestinationButton {
-        width: 90%;
-    }
-
-    /* Formular auf kleinen Bildschirmen anpassen */
-    #addDestinationForm { /* ID wurde von #add-destination-form zu #addDestinationForm geändert */
-        width: 95%; /* Fast volle Breite auf kleinen Bildschirmen */
-    }
-
-    /* Restaurant Formular und Buttons anpassen */
-    #restaurantReviewForm .form-input,
-    #restaurantReviewForm .submit-button {
+        background-color: rgba(226, 43, 134, 0.75);
+        /* Menü-Hintergrundfarbe */
         width: 100%;
-        max-width: none; /* Keine maximale Breite für volle Responsivität */
-    }
-}
-
-/* Für sehr kleine Bildschirme (Mobile Phones) */
-@media (max-width: 480px) {
-    body {
-        padding-top: 80px; /* Mehr Platz, da Navigationslinks ggf. 2 Zeilen einnehmen können */
+        height: 100vh;
+        /* Nimmt die gesamte Höhe des Viewports ein */
+        text-align: center;
+        transition: all 0.5s ease;
+        /* Sanfte Animation beim Aufklappen */
+        padding-top: 0%;
     }
 
-    /* Navigation Anpassung für sehr kleine Bildschirme */
-    .main-nav a {
-        padding: 8px 5px;
-        font-size: 0.9em;
-        width: 90%;
-        max-width: 200px;
+    .nav-item {
+        margin: 0.9rem 0;
+        /* Vertikaler Abstand zwischen den Links */
     }
 
-    h1 {
-        font-size: 1.8em;
-    }
-    h2 {
-        font-size: 1.3em;
+    .nav-link {
+        font-size: 1.5rem;
+        /* Größere Schrift für bessere Bedienbarkeit */
     }
 
-    footer {
-        padding: 10px 0;
-        font-size: 0.8em;
+    /* Diese Klasse wird mit JavaScript hinzugefügt, um das Menü aufzuklappen */
+    .nav-menu.active {
+        left: 0;
+    }
+
+    /* Animation für das Hamburger-Icon, wenn das Menü geöffnet ist */
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .hamburger.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
     }
 }
 
 /* --- NEU: Stile für Sprichwörter Anzeige (Micro-Projekt 4) --- */
-.proverb-display-section {
-    /* Diese Sektion verwendet bereits das allgemeine section[id$="Section"] Styling */
-    /* Zusätzliche Stile für die Inhalte der Sprichwort-Anzeige */
-}
+/* .proverb-display-section entfernt, da keine eigenen Stile definiert sind */
 
 .proverb-card {
-    background-color: rgba(255, 255, 255, 0.08); /* Leichter, halbtransparenter Hintergrund */
+    background-color: rgba(255, 255, 255, 0.08);
+    /* Leichter, halbtransparenter Hintergrund */
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 215, 0, 0.6); /* Goldener Rand */
+    border: 1px solid rgba(255, 215, 0, 0.6);
+    /* Goldener Rand */
     max-width: 600px;
     margin: 20px auto;
     text-align: center;
-    position: relative; /* Für Animationen */
-    overflow: hidden; /* Verhindert, dass der Inhalt beim Transformieren überläuft */
-    transition: transform 0.5s ease-out, opacity 0.5s ease-out; /* Übergänge für Animation */
+    position: relative;
+    /* Für Animationen */
+    overflow: hidden;
+    /* Verhindert, dass der Inhalt beim Transformieren überläuft */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+    /* Übergänge für Animation */
 }
 
 .proverb-card.fade-out {
@@ -393,25 +493,31 @@ footer {
     margin-bottom: 15px;
     line-height: 1.4;
     font-weight: bold;
-    color: #ffffff; /* Weißer Text */
+    color: #ffffff;
+    /* Weißer Text */
 }
 
 .proverb-text.japanese {
-    font-family: 'Noto Sans JP', sans-serif; /* Eine japanische Schriftart */
-    color: #ffd700; /* Goldene Farbe für Japanisch */
-    font-size: 1.8em; /* Etwas größer für Japanisch */
+    font-family: 'Noto Sans JP', sans-serif;
+    /* Eine japanische Schriftart */
+    color: #ffd700;
+    /* Goldene Farbe für Japanisch */
+    font-size: 1.8em;
+    /* Etwas größer für Japanisch */
     margin-bottom: 10px;
 }
 
 .proverb-text.german {
     font-style: italic;
-    color: #e22b86; /* Rosa Farbe für Deutsch */
+    color: #e22b86;
+    /* Rosa Farbe für Deutsch */
     font-size: 1.2em;
     margin-top: 5px;
 }
 
 .error-message {
-    color: #ff4d4d; /* Rote Farbe für Fehlermeldungen */
+    color: #ff4d4d;
+    /* Rote Farbe für Fehlermeldungen */
     font-weight: bold;
     margin-top: 15px;
     text-align: center;
