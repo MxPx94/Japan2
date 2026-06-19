@@ -54,6 +54,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const proverbErrorDisplay = document.getElementById('proverbError');
     const proverbCard = document.querySelector('.proverb-card'); // Element für Animation
 
+    const defaultProverbs = [
+        {
+            "japanisch": "七転び八起き (Nanakorobiyaoki)",
+            "deutsch": "Siebenmal hinfallen, achtmal aufstehen."
+        },
+        {
+            "japanisch": "猿も木から落ちる (Sarumokikaraochiru)",
+            "deutsch": "Auch Affen fallen von Bäumen."
+        },
+        {
+            "japanisch": "一石二鳥 (Issekinichō)",
+            "deutsch": "Ein Stein, zwei Vögel. (Zwei Fliegen mit einer Klappe schlagen.)"
+        },
+        {
+            "japanisch": "継続は力なり (Keizokuhachikaranari)",
+            "deutsch": "Weitermachen ist Stärke. (Beharrlichkeit zahlt sich aus.)"
+        },
+        {
+            "japanisch": "口は禍の元 (Kuchi wa wazawai no gen)",
+            "deutsch": "Der Mund ist der Ursprung des Unglücks. (Unglück kommt aus dem Mund.)"
+        },
+        {
+            "japanisch": "石の上にも三年 (Ishinouenimosan'nen)",
+            "deutsch": "Drei Jahre auf einem Stein. (Auch harte Arbeit zahlt sich aus.)"
+        }
+    ];
+
     let allProverbs = []; // Hier werden alle geladenen Sprichwörter gespeichert
     let currentProverbIndex = -1; // Index des aktuell angezeigten Sprichworts
 
@@ -88,21 +115,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             allProverbs = await response.json();
             console.log("Sprichwörter erfolgreich geladen:", allProverbs);
-
-            if (allProverbs.length > 0) {
-                // Zeige ein zufälliges Sprichwort in der Karte an
-                displayRandomProverb(); 
-                // NEU: Rufe die Funktion auf, um die Liste zu füllen
-                renderProverbsList(allProverbs); // <-- HIER IST DIE WESENTLICHE ÄNDERUNG
-            } else {
-                proverbErrorDisplay.textContent = 'Keine Sprichwörter in der Datei gefunden.';
-            }
-
         } catch (error) {
-            console.error("Fehler beim Laden der japanese-proverbs.json-Datei:", error);
-            proverbErrorDisplay.textContent = 'Fehler beim Laden der Sprichwörter. Bitte versuchen Sie es später erneut.';
-            japaneseProverbDisplay.textContent = '';
-            germanProverbDisplay.textContent = '';
+            console.warn("Fehler beim Laden der Datei (CORS/Offline). Verwende Fallback-Sprichwörter:", error);
+            allProverbs = defaultProverbs;
+        }
+
+        if (allProverbs.length > 0) {
+            // Zeige ein zufälliges Sprichwort in der Karte an
+            displayRandomProverb(); 
+            // NEU: Rufe die Funktion auf, um die Liste zu füllen
+            renderProverbsList(allProverbs);
+        } else {
+            proverbErrorDisplay.textContent = 'Keine Sprichwörter in der Datei gefunden.';
         }
     }
 

@@ -1,0 +1,87 @@
+# Clean Code Walkthrough – Japan Reiseplaner
+
+All issues identified in the audit have been fixed. Here is a summary of every change made.
+
+---
+
+## 🔴 Critical Bugs Fixed
+
+### `index.html`
+
+| Issue | Fix |
+|-------|-----|
+| `<footer>` was placed **after** `</body>` — invalid HTML | Moved inside `</body>` |
+| Three mid-content `<header>` elements with `<h1>` | Replaced with `<div class="section-header">` + `<h2>` |
+| **4 `<h1>` tags** on one page (bad for SEO) | Only one `<h1>` remains (the page title) |
+| `<th>` directly inside `<thead>` without a `<tr>` | Wrapped in `<tr>` |
+| Broken `http://127.0.0.1:3000` link | Link text kept, href removed |
+
+### `gallery.js`
+
+| Issue | Fix |
+|-------|-----|
+| `DOMContentLoaded` listener **nested inside** another one | Inner listener deleted — the outer one's hamburger block already covers this |
+| 10+ module-level `let` globals that were only used inside the callback | Converted to `const` locals inside `DOMContentLoaded` |
+| Tag 22-26 exercise code (push/splice/forEach/filter/find loops) ran on every page load as side-effects | Entire exercise block removed |
+
+### `Japan Reiseplaner.js`
+
+| Issue | Fix |
+|-------|-----|
+| `DOMContentLoaded` listener **nested inside** another one (lines 750-778) | Removed — replaced with a clean hamburger block at the end of the outer callback |
+| `addDestinationForm` submit handler registered **twice** — old version (lines 29-66) ran alongside the localStorage version, causing each destination to appear twice | Old handler removed; only the localStorage-aware handler remains |
+| Tag 36-39 exercise code (Promises with 2-second delays, a live loading spinner DOM element, JSON parse examples) ran on every page load | Wrapped in `/* ... */` comment blocks, clearly labelled as exercises |
+| Delete buttons styled entirely with `element.style.*` JS assignments | Replaced with `deleteButton.classList.add('delete-btn')` |
+
+### `visitenkarte.html`
+
+| Issue | Fix |
+|-------|-----|
+| Entire CSS `<style>` block (230+ lines) inlined in HTML while an external `.css` file was already linked | Style block removed — all styles moved to `visitenkarte.css` |
+| `[URL_ZU_DEINEM_BLOG]` and `[URL_ZU_DEINEM_SOCIAL_MEDIA]` placeholder bracket URLs | Replaced with `href="#"` and `<!-- TODO -->` comments |
+
+---
+
+## 🟡 Moderate Issues Fixed
+
+### `gallery-styles.css`
+
+- Removed the **dead `.main-nav` CSS block** (33 lines) — the `.navbar` system replaced it and `.main-nav` was never referenced in any HTML.
+- Fixed `padding-top: 0%` → `padding-top: 0` (invalid unit for a zero value).
+
+### `index-styles.css`
+
+- Added `.section-header`, `.section-header h2`, `.section-header p` styles to support the new semantic `<div class="section-header">` elements.
+- Fixed `padding-top: 0%` → `padding-top: 0`.
+
+### `reiseplaner-styles.css`
+
+- Added `.delete-btn` and `.delete-btn:hover` CSS classes so the Reiseplaner delete buttons are styled via CSS instead of JS.
+
+### `visitenkarte.css`
+
+- Full rewrite: merged the proper navbar/hamburger/footer base styles (which were being duplicated from `index-styles.css`) with the visitenkarte card-specific styles from the now-removed inline `<style>` block.
+
+---
+
+## Files Changed
+
+| File | Type of change |
+|------|---------------|
+| [index.html](file:///c:/Users/max-p/Desktop/Coding/Japan/index.html) | HTML structure fixes |
+| [index-styles.css](file:///c:/Users/max-p/Desktop/Coding/Japan/index-styles.css) | Added `.section-header`, fixed `padding-top` |
+| [gallery.js](file:///c:/Users/max-p/Desktop/Coding/Japan/gallery.js) | Removed nested listener, globals → locals, removed exercise logs |
+| [gallery-styles.css](file:///c:/Users/max-p/Desktop/Coding/Japan/gallery-styles.css) | Removed dead `.main-nav`, fixed `padding-top` |
+| [Japan Reiseplaner.js](file:///c:/Users/max-p/Desktop/Coding/Japan/Japan%20Reiseplaner.js) | Removed nested listener, old form handler, exercise code, inline styles |
+| [reiseplaner-styles.css](file:///c:/Users/max-p/Desktop/Coding/Japan/reiseplaner-styles.css) | Added `.delete-btn` CSS class |
+| [visitenkarte.html](file:///c:/Users/max-p/Desktop/Coding/Japan/visitenkarte.html) | Removed inline `<style>`, fixed placeholder URLs |
+| [visitenkarte.css](file:///c:/Users/max-p/Desktop/Coding/Japan/visitenkarte.css) | Full rewrite with all necessary styles |
+
+---
+
+## What Was NOT Changed
+
+- **Content** — all text, images, and functionality are identical.
+- **Visual design** — no colours, layouts or animations were altered.
+- **Quiz, Tokyo-Districts, currency-converter pages** — these were clean and needed no changes.
+- **Exercise code** in `Japan Reiseplaner.js` — commented out (not deleted), so you can still read and reference it.

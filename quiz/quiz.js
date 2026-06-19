@@ -133,7 +133,10 @@ document.addEventListener('DOMContentLoaded', function () {
             clearTimeout(timerInterval);
             timerInterval = null;
         }
+        // Freeze the timer bar at its current width to prevent a sudden jump to 0%
+        const currentWidth = getComputedStyle(timerBar).width;
         timerBar.style.transition = 'none';
+        timerBar.style.width = currentWidth;
     }
 
     function resetTimer() {
